@@ -1,0 +1,20 @@
+CREATE OR REPLACE PROCEDURE grade() AS $$
+DECLARE
+  sum INTEGER;
+  cr CURSOR FOR SELECT *FROM student;
+  rec RECORD;
+  BEGIN
+    OPEN cr;
+    LOOP
+      FETCH cr INTO rec;
+      EXIT WHEN NOT FOUND;
+      sum=(rec.m1+rec.m2+rec.m3)/3;
+      IF sum>40 THEN
+        UPDATE student SET total=m1+m2+m3,grade='P' WHERE CURRENT OF cr;
+      ELSE
+        UPDATE student SET total=m1+m2+m3,grade='F' WHERE CURRENT OF cr;
+      END IF;
+    END LOOP;
+  CLOSE cr;
+END;
+$$ LANGUAGE PLPGSQL;
