@@ -1,11 +1,11 @@
-CREATE OR REPLACE FUNCTION factorial(a integer) RETURNS VOID AS $$
+CREATE OR REPLACE FUNCTION factoriall(a integer) RETURNS VOID AS $$
 DECLARE 
   i INTEGER:=1;
   result INTEGER:=1;
 BEGIN
   LOOP
-      EXIT WHEN i=n+1;
-      result:=resul*i;
+      EXIT WHEN i=a+1;
+      result:=result*i;
       i:=i+1;
   END LOOP;
   RAISE NOTICE 'FACTORIAL : %',result;
