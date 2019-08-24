@@ -1,0 +1,13 @@
+CREATE OR REPLACE PROCEDURE mark_edit() AS $$
+DECLARE
+  cr CURSOR FOR SELECT *FROM student_details;
+  rec RECORD;
+BEGIN
+  OPEN cr;
+  LOOP
+    FETCH FROM cr into rec;
+    EXIT WHEN NOT FOUND;
+    UPDATE student_details SET marks=marks*1.05 WHERE CURRENT OF cr;
+  END LOOP;
+END;
+$$ LANGUAGE PLPGSQL;
